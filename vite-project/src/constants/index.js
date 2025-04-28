@@ -1,9 +1,8 @@
 
-const images = import.meta.glob('../assets/**/*.{jpg,png,webp}', { eager: true });
+const images = import.meta.glob('/public/assets/**/*.{jpg,png,webp}', { eager: true, as: 'url' });
 
-
-import reactIcon from "../assets/Icons/react-svgrepo-com.svg"
-import dotnetIcon from "../assets/Icons/dotnet-svgrepo-com.svg"
+import reactIcon from "/assets/Icons/react-svgrepo-com.svg"
+import dotnetIcon from "/assets/Icons/dotnet-svgrepo-com.svg"
 
 const projects = [
   {
@@ -21,8 +20,8 @@ const projects = [
       icon: reactIcon,
       link: 'https://github.com/Guleb23/TravelApp'
     },
-    folder: 'travels', // Указываем папку для этого проекта
-    photos: getSortedPhotos(images, 'travels') // Фильтруем по папке
+    folder: 'travels',
+    photos: getSortedPhotos(images, 'travels')
   },
   {
     name: 'Веб-сайт для компании Brainwave',
@@ -33,9 +32,6 @@ const projects = [
       icon: reactIcon,
       link: 'https://github.com/Guleb23/brainWave'
     },
-
-
-
     folder: 'Brainvawe',
     photos: getSortedPhotos(images, 'Brainvawe')
   },
@@ -61,9 +57,9 @@ const projects = [
 
 // Функция для фильтрации и сортировки фото
 function getSortedPhotos(images, folderName) {
-  return Object.values(images)
-    .filter(module => module.default.includes(`/${folderName}/`)) // Фильтр по папке
-    .map(module => module.default)
+  return Object.entries(images)
+    .filter(([path]) => path.includes(`/assets/${folderName}/`))
+    .map(([_, module]) => module.default || module)
     .sort((a, b) => {
       const numA = parseInt(a.match(/(\d+)/)?.[0] || 0);
       const numB = parseInt(b.match(/(\d+)/)?.[0] || 0);
