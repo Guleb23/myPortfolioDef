@@ -34,7 +34,7 @@ function Modal({ isOpen, onClose, project }) {
                     onClick={onClose}
                 >
                     <motion.div
-                        className="w-full h-[60%] max-w-6xl bg-zinc-900 rounded-lg shadow-xl flex flex-col justify-center"
+                        className="w-full h-full md:h-[60%] max-w-6xl bg-zinc-900 rounded-lg shadow-xl flex flex-col justify-center"
                         initial={{ y: -20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: 20, opacity: 0 }}
