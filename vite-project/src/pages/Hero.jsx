@@ -8,17 +8,21 @@ import AnimatedCounter from '../Components/AnimatedCounter';
 
 const Hero = () => {
     useGSAP(() => {
-        gsap.from('.hero-text h1', {
-            y: 50,
-            opacity: 0
-        }, {
-            y: 0,
-            opacity: 1,
-            stagger: 0.5,
-            duration: 1,
-            ease: 'power2.inOut'
-        })
-    })
+        gsap.fromTo('.hero-text h1',
+            {
+                y: 50,
+                opacity: 0
+            },
+            {
+                y: 0,
+                opacity: 1,
+                stagger: 0.3,
+                duration: 0.8,
+                ease: 'power2.out',
+                delay: 0.2
+            }
+        );
+    }, []);
 
     return (
         <section id='hero' className='relative overflow-hidden'>

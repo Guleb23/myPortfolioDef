@@ -32,32 +32,43 @@ const ShowCase = () => {
     }, [isModalOpen]);
     useGSAP(() => {
         const project = [projOneRef.current, projTwoRef.current, projThreeRef.current];
-        gsap.from(sectionRef.current,
+
+        // Initial section animation
+        gsap.fromTo(sectionRef.current,
             {
-                opacity: 0
+                opacity: 0,
+                y: 20
             },
             {
                 opacity: 1,
-                duration: 1.5,
-            })
-
-        project.forEach((item, index) => {
-            gsap.fromTo(item, {
-                y: 50,
-                opacity: 0
-            }, {
                 y: 0,
-                opacity: 1,
                 duration: 1,
-                delay: 0.3 * (index + 1),
-                scrollTrigger: {
-                    trigger: item,
-                    start: "top bottom-=100"
-                }
+                ease: "power2.out"
             }
-            )
-        })
-    }, [])
+        );
+
+        // Projects animation
+        project.forEach((item, index) => {
+            gsap.fromTo(item,
+                {
+                    y: 50,
+                    opacity: 0
+                },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    delay: 0.3 * (index + 1),
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: item,
+                        start: "top bottom-=100",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+    }, []);
     const onClick = () => {
 
         window.open("https://github.com/Guleb23", '_blank');
